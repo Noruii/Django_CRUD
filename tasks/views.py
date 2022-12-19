@@ -16,7 +16,7 @@ def home(request):
 def signup(request):
     if request.method == 'GET':
         return render(request, 'signup.html', {
-        'form': UserCreationForm
+            'form': UserCreationForm
         })
     else:
         if request.POST['password1'] == request.POST['password2']:
@@ -32,6 +32,11 @@ def signup(request):
                 return render(request, 'signup.html', {
                     'form': UserCreationForm,
                     'error': 'Username already exists'
+                })
+            except ValueError:
+                return render(request, 'signup.html', {
+                    'form': UserCreationForm,
+                    'error': 'Enter a username and password'
                 })
         return render(request, 'signup.html', {
             'form': UserCreationForm,
